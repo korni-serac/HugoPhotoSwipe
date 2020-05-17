@@ -255,7 +255,7 @@ class Album(object):
         # self.photos
         photo_files = [p.filename for p in self.photos]
         photo_dir = os.path.join(self._album_dir, settings.photo_dir)
-        missing = [f for f in sorted(os.listdir(photo_dir), reverse=True) if not f in photo_files]
+        missing = [f for f in os.listdir(photo_dir), reverse=True if not f in photo_files]
         missing.sort()
         for f in missing:
             pho = Photo(
@@ -323,6 +323,9 @@ class Album(object):
             for photo in iterator:
                 photo.create_sizes()
                 del photo.original_image
+                
+        # reverse sort by original path all photos
+        self.photos = sorted(self.photos, key=lambda x: x.original_path, reverse=True)
 
         # Overwrite the markdown file
         logging.info("[%s] Writing markdown file." % self.name)
