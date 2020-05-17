@@ -15,7 +15,7 @@ help:
 		 %s\n", $$1, $$2}'
 
 install: ## Install for the current user using the default python command
-	python setup.py install --user
+	python3 setup.py install --user
 
 install2: ## Install for the current user using the python2 command
 	python2 setup.py install --user
