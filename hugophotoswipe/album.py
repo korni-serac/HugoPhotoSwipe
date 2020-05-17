@@ -255,7 +255,7 @@ class Album(object):
         # self.photos
         photo_files = [p.filename for p in self.photos]
         photo_dir = os.path.join(self._album_dir, settings.photo_dir)
-        missing = [f for f in os.listdir(photo_dir) if not f in photo_files]
+        missing = [f for f in sorted(os.listdir(photo_dir), reverse=True) if not f in photo_files]
         missing.sort()
         for f in missing:
             pho = Photo(
